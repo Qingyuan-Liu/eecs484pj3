@@ -107,7 +107,7 @@ while(rst.next()){
 	Statement stmt3 = oracleConnection.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
 	ResultSet rst3= stmt3.executeQuery("SELECT C.CITY_ID, C.STATE_NAME, C.COUNTRY_NAME "+
 		"FROM "+cityTableName+ " C, "+hometownCityTableName+" UH, "+ userTableName+" U "+
-		"WHERE UH.USER_ID=U.USER_ID AND UH.CURRENT_CITY_ID=C.CITY_ID AND U.USER_ID="+uid);
+		"WHERE UH.USER_ID=U.USER_ID AND UH.HOMETOWN_CITY_ID=C.CITY_ID AND U.USER_ID="+uid);
 	while(rst3.next()){
 		JSONObject hometown=new JSONObject();
 		hometown.put("city",rst3.getString(1));
