@@ -91,7 +91,7 @@ while(rst.next()){
 	INNER_USER.put("DOB",rst.getString(7));
 	
 	Statement stmt2 = oracleConnection.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
-	ResultSet rst2= stmt.excuteQuery("SELECT C.CITY_ID, C.STATE_NAME, C.COUNTYR_NAME "+
+	ResultSet rst2= stmt2.excuteQuery("SELECT C.CITY_ID, C.STATE_NAME, C.COUNTYR_NAME "+
 		"FROM "+cityTableName+ " C, "+currentCityTableName+" UC, "+userTableName+" U "+
 		"WHERE UC.USER_ID=U.USER_ID AND UC.CURRENT_CITY_ID=C.CITY_ID AND U.USER_ID="+uid);
 	while(rst2.next()){
@@ -105,7 +105,7 @@ while(rst.next()){
     stmt2.close();
 
 	Statement stmt3 = oracleConnection.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
-	ResultSet rst3= stmt.excuteQuery("SELECT C.CITY_ID, C.STATE_NAME, C.COUNTYR_NAME "+
+	ResultSet rst3= stmt3.excuteQuery("SELECT C.CITY_ID, C.STATE_NAME, C.COUNTYR_NAME "+
 		"FROM "+cityTableName+ " C, "+hometownCityTableName+" UH, "+ userTableName+" U "+
 		"WHERE UH.USER_ID=U.USER_ID AND UH.CURRENT_CITY_ID=C.CITY_ID AND U.USER_ID="+uid);
 	while(rst3.next()){
@@ -119,7 +119,7 @@ while(rst.next()){
     stmt3.close();
 
 	Statement stmt4 = oracleConnection.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
-	ResultSet rst4= stmt.excuteQuery("SELECT F.USER2_ID "+" FROM "+userTableName+ " U,"+friendsTableName+" F "+
+	ResultSet rst4= stmt4.excuteQuery("SELECT F.USER2_ID "+" FROM "+userTableName+ " U,"+friendsTableName+" F "+
 									"WHERE U.USER_ID=F.USER1_ID AND U.USER_ID="+uid);
 	JSONArray friend=new JSONArray();
 	while(rst4.next()){
