@@ -72,7 +72,7 @@ public class GetData{
 
     @SuppressWarnings("unchecked")
     public JSONArray toJSON() throws SQLException{ 
-    	Statement stmt = oracle.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+    	Statement stmt = oracleConnection.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
     	JSONArray users_info = new JSONArray();
 		
 	// Your implementation goes here....		
@@ -90,7 +90,7 @@ while(rst.next()){
 	INNER_USER.put("MOB",rst.getString(6));
 	INNER_USER.put("DOB",rst.getString(7));
 	
-	Statement stmt2 = oracle.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+	Statement stmt2 = oracleConnection.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
 	ResultSet rst2= stmt.excuteQuery("SELECT C.CITY_ID, C.STATE_NAME, C.COUNTYR_NAME "+
 		"FROM "+cityTableName+ " C, "+currentCityTableName+" UC, "+userTableName+" U "+
 		"WHERE UC.USER_ID=U.USER_ID AND UC.CURRENT_CITY_ID=C.CITY_ID AND U.USER_ID="+uid);
@@ -104,7 +104,7 @@ while(rst.next()){
 	rst2.close();
     stmt2.close();
 
-	Statement stmt3 = oracle.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+	Statement stmt3 = oracleConnection.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
 	ResultSet rst3= stmt.excuteQuery("SELECT C.CITY_ID, C.STATE_NAME, C.COUNTYR_NAME "+
 		"FROM "+cityTableName+ " C, "+hometownCityTableName+" UH, "+ userTableName+" U "+
 		"WHERE UH.USER_ID=U.USER_ID AND UH.CURRENT_CITY_ID=C.CITY_ID AND U.USER_ID="+uid);
@@ -118,7 +118,7 @@ while(rst.next()){
 	rst3.close();
     stmt3.close();
 
-	Statement stmt4 = oracle.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+	Statement stmt4 = oracleConnection.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
 	ResultSet rst4= stmt.excuteQuery("SELECT F.USER2_ID "+" FROM "+userTableName+ " U,"+friendsTableName+" F "+
 									"WHERE U.USER_ID=F.USER1_ID AND U.USER_ID="+uid);
 	JSONArray friend=new JSONArray();
