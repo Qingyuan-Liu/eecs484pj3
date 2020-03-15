@@ -125,8 +125,10 @@ while(rst.next()){
 	while(rst4.next()){
 		friend.put(rst4.getString(1));
 	}
+	INNER_USER.put("friends",friend);
 	rst4.close();
     stmt4.close();
+    users_info.put(INNER_USER);
 }
 	rst.close();
     stmt.close();
