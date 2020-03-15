@@ -91,7 +91,7 @@ while(rst.next()){
 	INNER_USER.put("DOB",rst.getInt(7));
 	
 	Statement stmt2 = oracleConnection.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
-	ResultSet rst2= stmt2.executeQuery("SELECT C.CITY_ID, C.STATE_NAME, C.COUNTRY_NAME "+
+	ResultSet rst2= stmt2.executeQuery("SELECT C.CITY_NAME, C.STATE_NAME, C.COUNTRY_NAME "+
 		"FROM "+cityTableName+ " C, "+currentCityTableName+" UC, "+userTableName+" U "+
 		"WHERE UC.USER_ID=U.USER_ID AND UC.CURRENT_CITY_ID=C.CITY_ID AND U.USER_ID="+uid);
 	while(rst2.next()){
@@ -105,7 +105,7 @@ while(rst.next()){
     stmt2.close();
 
 	Statement stmt3 = oracleConnection.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
-	ResultSet rst3= stmt3.executeQuery("SELECT C.CITY_ID, C.STATE_NAME, C.COUNTRY_NAME "+
+	ResultSet rst3= stmt3.executeQuery("SELECT C.CITY_NAME, C.STATE_NAME, C.COUNTRY_NAME "+
 		"FROM "+cityTableName+ " C, "+hometownCityTableName+" UH, "+ userTableName+" U "+
 		"WHERE UH.USER_ID=U.USER_ID AND UH.HOMETOWN_CITY_ID=C.CITY_ID AND U.USER_ID="+uid);
 	while(rst3.next()){
