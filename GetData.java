@@ -81,7 +81,7 @@ public class GetData{
 
 while(rst.next()){
 	JSONObject INNER_USER=new JSONObject();
-	int uid=getInt(1);
+	int uid=rst.getInt(1);
 	INNER_USER.put("user_id",rst.getInt(1));
 	INNER_USER.put("first_name",rst.getString(2));
 	INNER_USER.put("last_name",rst.getString(3));
@@ -128,6 +128,8 @@ while(rst.next()){
 	rst4.close();
     stmt4.close();
 }
+	rst.close();
+    stmt.close();
 		
 		return users_info;
     }
