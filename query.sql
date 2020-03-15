@@ -4,11 +4,11 @@ FROM USERS
 #拿到userid之后用userid找这个人的city的信息
 SELECT C.CITY_ID, C.STATE_NAME, C.COUNTYR_NAME
 FROM CITIES C, USER_CURRENT_CITIES UC, USERS U
-WHERE UC.USER_ID=U.USER_ID AND UC.CURRENT_CITY_ID=C.CITY_ID
+WHERE UC.USER_ID=U.USER_ID AND UC.CURRENT_CITY_ID=C.CITY_ID and u.user_id=
 
 SELECT C.CITY_ID, C.STATE_NAME, C.COUNTYR_NAME
 FROM CITIES C, USER_HOMETOWN_CITIES UH, USERS U
-WHERE UH.USER_ID=U.USER_ID AND UH.HOMETOWN_CITY_ID=C.CITY_ID
+WHERE UH.USER_ID=U.USER_ID AND UH.HOMETOWN_CITY_ID=C.CITY_ID 
 
 SELECT F.USER2_ID
 FROM USERS U, FRINEDS F
@@ -24,9 +24,9 @@ while(rst.next()){
 	INNER_USER.put("first_name",rst.getString(2));
 	INNER_USER.put("last_name",rst.getString(3));
 	INNER_USER.put("gender",rst.getString(4));
-	INNER_USER.put("YOB",rst.getString(5));
-	INNER_USER.put("MOB",rst.getString(6));
-	INNER_USER.put("DOB",rst.getString(7));
+	INNER_USER.put("YOB",rst.getInt(5));
+	INNER_USER.put("MOB",rst.getInt(6));
+	INNER_USER.put("DOB",rst.getInt(7));
 	
 	Statement stmt2 = oracle.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
 	ResultSet rst2= stmt.excuteQuery("SELECT C.CITY_ID, C.STATE_NAME, C.COUNTYR_NAME "+
@@ -61,8 +61,9 @@ while(rst.next()){
 									"WHERE U.USER_ID=F.USER1_ID AND U.USER_ID="+uid);
 	JSONArray friend=new JSONArray();
 	while(rst4.next()){
-		friend.put(rst4.getString(1));
+		friend.put(rst4.getInt(1));
 	}
+
 	rst4.close();
     stmt4.close();
 }

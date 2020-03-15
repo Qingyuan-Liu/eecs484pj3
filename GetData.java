@@ -86,9 +86,9 @@ while(rst.next()){
 	INNER_USER.put("first_name",rst.getString(2));
 	INNER_USER.put("last_name",rst.getString(3));
 	INNER_USER.put("gender",rst.getString(4));
-	INNER_USER.put("YOB",rst.getString(5));
-	INNER_USER.put("MOB",rst.getString(6));
-	INNER_USER.put("DOB",rst.getString(7));
+	INNER_USER.put("YOB",rst.getInt(5));
+	INNER_USER.put("MOB",rst.getInt(6));
+	INNER_USER.put("DOB",rst.getInt(7));
 	
 	Statement stmt2 = oracleConnection.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
 	ResultSet rst2= stmt2.executeQuery("SELECT C.CITY_ID, C.STATE_NAME, C.COUNTRY_NAME "+
@@ -123,7 +123,7 @@ while(rst.next()){
 									"WHERE U.USER_ID=F.USER1_ID AND U.USER_ID="+uid);
 	JSONArray friend=new JSONArray();
 	while(rst4.next()){
-		friend.put(rst4.getString(1));
+		friend.put(rst4.getInt(1));
 	}
 	INNER_USER.put("friends",friend);
 	rst4.close();
