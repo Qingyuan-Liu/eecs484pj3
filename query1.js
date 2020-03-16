@@ -2,7 +2,15 @@
 
 function find_user(city, dbname){
     db = db.getSiblingDB(dbname);
-    var results = [];
+	var results = [];
+	
+    db.users.find().forEach(
+	function(myDoc,city){
+	if(myDoc.hometown.city=='Bucklebury'){
+	results.push(myDoc.user_id);
+	}
+	}
+	);
     // TODO: return a Javascript array of user_ids. 
     // db.users.find(...);
 
