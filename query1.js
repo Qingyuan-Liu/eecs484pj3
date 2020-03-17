@@ -6,7 +6,7 @@ function find_user(city, dbname){
 	
     db.users.find().forEach(
 	function(myDoc,city){
-	if(myDoc.hometown.city=='Bucklebury'){
+	if(myDoc.hometown.city==city){
 	results.push(myDoc.user_id);
 	}
 	}
