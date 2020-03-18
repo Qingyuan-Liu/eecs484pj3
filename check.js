@@ -248,4 +248,51 @@ if(db.flat_users.find({"user_id":582,"friends":598}).count()==0){
 
 
 
+db.flat_users.find().forEach(function(myDoc) {
+    db.friends.insert([{"user1_id":myDoc.user_id, "user2_id":myDoc.friends}, {"user1_id":myDoc.friends, "user2_id":myDoc.user_id}]);
+  });
+
+
+  var age={}
+  db.users.find().forEach(
+    function(myDoc){
+      age[myDoc.user_id]=myDoc.YOB
+    }
+    )
+
+var oldest={}
+var count=0
+db.users.find().forEach(
+	function(myDoc){
+		db.friends.find({user1_id:myDoc.user_id})forEach(
+			function(myDoc1){
+				if(oldest[myDoc1.user1_id]===undefined || age[oldest[myDoc1.user1_id]]>age[myDoc1.user2_id] || (age[oldest[myDoc1.user1_id]]==age[myDoc1.user2_id] && oldest[myDoc1.user1_id] > myDoc1.user2_id)){
+					oldest[myDoc1.user1_id] = myDoc1.user2_id
+					count=count
+				}
+			}
+			
+		)
+	}
+)
+print(oldest[585])
+
+
+
+
+print(age[585])
+
+
+
+
+db.friends.find({user1_id:585})
+
+
+
+
+
+
+
+
+
 
