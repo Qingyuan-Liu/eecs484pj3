@@ -11,5 +11,21 @@ function oldest_friend(dbname){
   var results = {};
   // TODO: implement oldest friends
   // return an javascript object described above
+   db.users.find().forEach(
+    function (myDoc) {
+      var user_friend = myDoc.friends
+      db.flat_users.find({ friends: myDoc.user_id }).forEach(
+        function (myDoc1) {
+          user_friend.push(myDoc1.user_id)
+        }
+      )
+      db.friends.insert({"_id":myDoc.user_id,"friends":user_friend})
+    }
+  )
+   db.friends.find().forEach(
+    function(myDoc){
+      
+    }
+    )
   return results
 }

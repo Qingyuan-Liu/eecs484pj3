@@ -7,23 +7,17 @@
 }
 */
 
+
 function unwind_friends(dbname){
     db = db.getSiblingDB(dbname);
-    var user_list=[];
-    db.users.find({},{user_id:1,friends:1,_id:0}).forEach(
-	function(myDoc){
-		user_list.push(myDoc)
+		db.users.aggregate( [
+                      { $unwind : "$friends" },
+                      { $addFields: { userId : "$_id" }},
+                      { $project: { user_id : 1 , friends : 1, _id:0 }},
+                      { $out : "flat_users" },
+                  ] )
 	}
-)
-	db.getCollection('flat_users').insertMany(user_list);
-	db.flat_users.aggregate([
-		{$unwind : "$friends"}
-	])
-
-
-
-
 
     
     // returns nothing. It creates a collection instead as specified above.
-}
+

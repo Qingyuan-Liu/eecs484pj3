@@ -1,6 +1,6 @@
 // fill in your database name
 // Your dbname is your uniqname
-var dbname = 'uniqname';
+var dbname = 'qyyf';
 
 var l1 = load('query1.js')
 var l2 = load('query2.js')
@@ -126,4 +126,9 @@ if (ans8 == 16) {
 	print("Incorrect.");
 	print("Expecting 16 cities(keys), you returned ", ans8);
 }
+
+
+
+
+
 

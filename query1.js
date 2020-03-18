@@ -5,16 +5,12 @@ function find_user(city, dbname){
 	var results = [];
 	
     db.users.find().forEach(
-	function(myDoc,city){
+	function(myDoc){
 	if(myDoc.hometown.city==city){
 	results.push(myDoc.user_id);
 	}
 	}
-	);
-    // TODO: return a Javascript array of user_ids. 
-    // db.users.find(...);
-
-    // See test.js for a partial correctness check.  
-    // The result will be an array of integers. The order does not matter.                                                               
+	);  
+	print(results)                                                     
     return results;
 }
