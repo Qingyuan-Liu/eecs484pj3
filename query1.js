@@ -10,7 +10,6 @@ function find_user(city, dbname){
 	results.push(myDoc.user_id);
 	}
 	}
-	);  
-	print(results)                                                     
+	);                                                     
     return results;
 }

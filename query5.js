@@ -8,6 +8,13 @@
 
 function oldest_friend(dbname){
   db = db.getSiblingDB(dbname);
+      db.users.aggregate( [
+                      { $unwind : "$friends" },
+                      { $addFields: { userId : "$_id" }},
+                      { $project: { user_id : 1 , friends : 1, _id:0 }},
+                      { $out : "flat_users" },
+                  ] )
+      
   db.flat_users.find().forEach(function(myDoc) {
     db.friends.insert([{"user1_id":myDoc.user_id, "user2_id":myDoc.friends}, {"user1_id":myDoc.friends, "user2_id":myDoc.user_id}]);
   });
